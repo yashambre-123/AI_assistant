@@ -17,8 +17,8 @@ import serial
 ser=serial.Serial('COM6',9600)
 computer=pyttsx3.init('sapi5') # sapi5 is the microsoft speech api . This computer will only speak with us
 voices=computer.getProperty('voices') # we get the list of voices [boy voice,girl voice]
-#print(voices[1].id) we get the girl voice
-#print(voices[0].id) we get the boy voice
+#print(voices[1].id) we get the women voice
+#print(voices[0].id) we get the men voice
 computer.setProperty('voice',voices[1].id) # here we set the voice , either of a girl or a boy
 
 def speak(audio): # by this function,we can make the computer to speak
@@ -80,14 +80,14 @@ def send_whatsapp(phone_number,message,hour,minute):
 
 def email(reciever,subject,content):
     email=EmailMessage()
-    email['from']='yash ulhas ambre'
+    email['from']='' # type your name here in the single quotes
     email['to']=reciever
     email['subject']=subject
     email.set_content(content)
     with smtplib.SMTP(host='smtp.gmail.com',port=587) as server:
         server.ehlo()
         server.starttls()
-        server.login('yash2002ambre@gmail.com','hoko@123@123')
+        server.login('','') # type your mail id in the first single quotes, and type your mail account's password in the second single quotes
         server.send_message(email)
         server.close()
 
@@ -124,7 +124,7 @@ if __name__=="__main__":
         elif 'roll' in querry:
             roll()
         elif'weather' in querry:
-            url='http://api.openweathermap.org/data/2.5/weather?q=mumbai&units=imperial&appid=2ffed89c14ec6fa6f7fa8e3f475d84cd'
+            url='http://api.openweathermap.org/data/2.5/weather?q=mumbai&units=imperial&appid=2ffed89c14ec6fa6f7fa8e3f475d84cd' # this is the weather api
             res=requests.get(url)
             data=res.json() # the res we will get it in the json format
             weather=data['weather'][0]['main']
@@ -162,7 +162,7 @@ if __name__=="__main__":
             get_news()
         elif 'send mail' in querry:
             try:
-                reciever='sonalambre8@gmail.com'
+                reciever='' # type the reciever's email id here in the single quotes
                 speak("what is the subject of the mail,sir")
                 subject=take_command()
                 speak("what is the content for the mail,sir")
@@ -172,6 +172,7 @@ if __name__=="__main__":
             except Exception as e:
                 print(e)
                 speak("sorry,sir email cannot be sent")
+        # here are some of the funny comments, which you can remove if you don't want
         elif 'what is your name' in querry:
             speak("my name is siri,sir")
         elif 'are you mental' in querry:
@@ -180,10 +181,6 @@ if __name__=="__main__":
             speak("my home is in yash laptop")
         elif 'who has made you' in querry:
             speak("i have been created by yash ulhas ambre")
-        elif 'why i am stammering' in querry:
-            speak("you are stammering because your grandfather is also stammering")
-        elif 'who is my brother' in querry:
-            speak("sir,your brother is a mental and he is very idiot")
         elif 'why has your owner made you' in querry:
             speak("yash sir has made me because in the future,there will be a good correlation between human beings and AI robots")
         elif 'bye bye siri' in querry:
